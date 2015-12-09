@@ -8,6 +8,8 @@ function Tree(root) {
 
   var self = this;
   function addPath(path) {
+    console.log('adding path: ' + path);
+
     var pathParts = stripOutsideSlashes(path).split('/');
 
     if (pathParts < 1) {
@@ -40,6 +42,8 @@ function Tree(root) {
   }
 
   function addCombinatorialLeafPath(path) {
+    console.log('adding path: ' + path);
+
     var pathParts = stripOutsideSlashes(path).split('/');
 
     if (pathParts < 1) {
@@ -74,6 +78,8 @@ function Tree(root) {
   }
 
   function addCombinatorialPath(path) {
+    console.log('adding path: ' + path);
+    
     var pathParts = stripOutsideSlashes(path).split('/');
 
     if (pathParts < 1) {

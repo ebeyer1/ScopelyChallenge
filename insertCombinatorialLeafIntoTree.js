@@ -1,4 +1,6 @@
 function insertCombinatorialLeafIntoTree() {
+  console.log("#3. Support a combinatorial lead-node insert:");
+
   var tree = new Tree('home');
 
   tree.addCombinatorialLeafPath('/home/music/rap|rock|pop');

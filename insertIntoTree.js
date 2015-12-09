@@ -1,4 +1,6 @@
 function insertIntoTree() {
+  console.log("#1. insert into Tree:");
+
   var tree = new Tree('home');
 
   tree.addPath('/home/sports/basketball/ncaa/');

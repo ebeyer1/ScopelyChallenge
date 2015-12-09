@@ -1,4 +1,6 @@
 function insertCombinatorialPathIntoTree() {
+  console.log("#4. Support combinatorial nodes at any level:");
+
   var tree = new Tree('home');
 
   tree.addCombinatorialPath('/home/sports|music/misc|favorites');
