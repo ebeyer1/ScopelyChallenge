@@ -1,6 +1,7 @@
 function insertIntoTree() {
-  var tree = new Tree('/home/sports/basketball/ncaa/');
+  var tree = new Tree('home');
 
+  tree.addPath('/home/sports/basketball/ncaa/');
   console.log('tree as JSON with initial data');
   console.log(JSON.stringify(tree));
 

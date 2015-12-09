@@ -1,7 +1,7 @@
 /* create tree from path */
-function Tree(path) {
+function Tree(root) {
   /* setup Tree model */
-  this.root = null;
+  this.root = new Node(root);
   this.addPath = addPath;
 
   var self = this;
@@ -22,18 +22,32 @@ function Tree(path) {
       }
     }
 
-    for (var i = 1; i < pathParts.length; i++) {
-      var currentNode = pathParts.find(function(p) {
-        return p.data == pathParts[i];
-      })
-      if (typeof currentNode === "undefined") {
-        currentNode = new Node(pathParts[i]);
-        // currentNode.parent = parentNode; // uncomment if we'd like a reference to parent node
-        parentNode.children.push(currentNode);
-      }
+    var lastIndex = pathParts.length-1;
+    for (var i = 1; i <= lastIndex; i++) {
+      if (i == lastIndex) {
+        var leaves = pathParts[i].split('|');
+        leaves.forEach(function(leaf) {
+          getOrAddNode(leaf, parentNode);
+        })
+      } else {
+        var currentNode = getOrAddNode(pathParts[i], parentNode);
 
-      parentNode = currentNode;
+        parentNode = currentNode;
+      }
     }
+  }
+
+  function getOrAddNode(data, parentNode) {
+    var currentNode = parentNode.children.find(function(node) {
+      return node.data === data;
+    })
+    if (typeof currentNode === "undefined") {
+      currentNode = new Node(data);
+      // currentNode.parent = parentNode; // uncomment if we'd like a reference to parent node
+      parentNode.children.push(currentNode);
+    }
+
+    return currentNode;
   }
 
   /* helper methods */
@@ -53,9 +67,6 @@ function Tree(path) {
 
     return path;
   }
-
-  /* Setup tree with initial node */
-  addPath(path);
 }
 
 function Node(data) {
