@@ -3,6 +3,7 @@ function Tree(root) {
   /* setup Tree model */
   this.root = new Node(root);
   this.addPath = addPath;
+  this.addCombinatorialLeafPath = addCombinatorialLeafPath;
 
   var self = this;
   function addPath(path) {
@@ -29,6 +30,41 @@ function Tree(root) {
         leaves.forEach(function(leaf) {
           getOrAddNode(leaf, parentNode);
         })
+      } else {
+        var currentNode = getOrAddNode(pathParts[i], parentNode);
+
+        parentNode = currentNode;
+      }
+    }
+  }
+
+  function addCombinatorialLeafPath(path) {
+    var pathParts = stripOutsideSlashes(path).split('/');
+
+    if (pathParts < 1) {
+      return;
+    }
+
+    var parentNode = self.root;
+    if (parentNode === null) {
+      self.root = new Node(pathParts[0]);
+      parentNode = self.root;
+    } else {
+      if (self.root.data !== pathParts[0]) {
+        throw new Error('Root node does not match');
+      }
+    }
+
+    var lastIndex = pathParts.length-1;
+    for (var i = 1; i <= lastIndex; i++) {
+      if (i == lastIndex) {
+        var leaves = pathParts[i].split('|');
+        var combinations = getTextCombinations(leaves);
+
+        combinations.forEach(function(leaf) {
+          getOrAddNode(leaf, parentNode);
+        })
+        console.log(combinations);
       } else {
         var currentNode = getOrAddNode(pathParts[i], parentNode);
 
@@ -66,6 +102,24 @@ function Tree(root) {
     }
 
     return path;
+  }
+
+  function getTextCombinations(arr) {
+    var combinations = [];
+    var length = arr.length;
+    var totalCombinations = Math.pow(2, length);
+    for (var i = 0; i < totalCombinations; i++) {
+      var tmp = [];
+      for (var j = 0; j < length; j++) {
+        if (i & Math.pow(2,j)) {
+          tmp.push(arr[j]);
+        }
+      }
+      if (tmp.length > 0) {
+        combinations.push(tmp.join('-'));
+      }
+    }
+    return combinations;
   }
 }
 
