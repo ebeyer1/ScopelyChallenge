@@ -1,0 +1,13 @@
+body {
+  margin: 1rem;
+  font-family: Helvetica;
+  background-color: #EBEBEB;
+}
+
+.unfinished {
+  font-style: italic;
+}
+
+.signature {
+  font-style: italic;
+}

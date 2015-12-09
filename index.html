@@ -2,6 +2,8 @@
   <head>
     <title>Scopely Challenge</title>
 
+    <link rel="stylesheet" type="text/css" href="styles.css">
+
     <script type="text/javascript" src="tree.js"></script>
     <script type="text/javascript" src="insertIntoTree.js"></script>
     <script type="text/javascript" src="insertDualLeafIntoTree.js"></script>
@@ -17,10 +19,26 @@
     <p>As a quick way to get an answer... Open the developer console to view the output after clicking a button.</p>
 
     <ol>
-      <li>1. Insert into Tree. <button onclick="javascript: insertIntoTree()">Run #1</button></li>
-      <li>2. Support Dual Lead-node inserts. <button onclick="javascript: insertDualLeafIntoTree()">Run #2</button></li>
-      <li>3. Support a combinatorial leaf-node insert. <button onclick="javascript: insertCombinatorialLeafIntoTree()">Run #3</button></li>
-      <li>4. Support combinatorial nodes at any level. <button onclick="javascript: insertCombinatorialPathIntoTree()">Run #4</button></li>
+      <li>Insert into Tree. <button onclick="javascript: insertIntoTree()">Run #1</button></li>
+      <li>Support Dual Lead-node inserts. <button onclick="javascript: insertDualLeafIntoTree()">Run #2</button></li>
+      <li>Support a combinatorial leaf-node insert. <button onclick="javascript: insertCombinatorialLeafIntoTree()">Run #3</button></li>
+      <li>Support combinatorial nodes at any level. <button onclick="javascript: insertCombinatorialPathIntoTree()">Run #4</button></li>
+      <li class="unfinished">
+        I don't think it would have been too difficult to finish this question, I just spent too much time working on the first few. I would have just walked the path of the created tree appending the children until I hit the end of the branch (a node without any children).
+      </li>
+      <li class="unfinished">
+        Similar to the last question. I didn't finish it. I would have again walked the tree structure checking for node matches and returned the result if they were the same.
+      </li>
     </ol>
+
+    <h3>If I had more time</h3>
+    <div>Given more time there are a few things I think I would have changed.</div>
+    <ul>
+      <li>I would have played with treating the node children as dictionaries rather than arrays so I could quickly check for children values in a given node, without iterating over the children.</li>
+      <li>I was thinking of trying to use recursion when adding nodes opposed to looping over the path segments in a for loop.</li>
+    </ul>
+
+    <h3>Thanks for taking a look!</h3>
+    <div class="signature">Eric M. Beyer</div>
   </body>
 </html>
