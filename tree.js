@@ -4,6 +4,7 @@ function Tree(root) {
   this.root = new Node(root);
   this.addPath = addPath;
   this.addCombinatorialLeafPath = addCombinatorialLeafPath;
+  this.addCombinatorialPath = addCombinatorialPath;
 
   var self = this;
   function addPath(path) {
@@ -64,11 +65,48 @@ function Tree(root) {
         combinations.forEach(function(leaf) {
           getOrAddNode(leaf, parentNode);
         })
-        console.log(combinations);
       } else {
         var currentNode = getOrAddNode(pathParts[i], parentNode);
 
         parentNode = currentNode;
+      }
+    }
+  }
+
+  function addCombinatorialPath(path) {
+    var pathParts = stripOutsideSlashes(path).split('/');
+
+    if (pathParts < 1) {
+      return;
+    }
+
+    var parentNode = self.root;
+    if (parentNode === null) {
+      self.root = new Node(pathParts[0]);
+      parentNode = self.root;
+    } else {
+      if (self.root.data !== pathParts[0]) {
+        throw new Error('Root node does not match');
+      }
+    }
+
+    var lastIndex = pathParts.length-1;
+    var parents = [parentNode];
+    for (var i = 1; i <= lastIndex; i++) {
+        var leaves = pathParts[i].split('|');
+        var combinations = getTextCombinations(leaves);
+
+        /* for each parent node add all the children */
+        var newParents = [];
+        parents.forEach(function(parent) {
+          combinations.forEach(function(leaf) {
+            /* create new node and add item to next generation of parents */
+            var currentNode = getOrAddNode(leaf, parent);
+            newParents.push(currentNode);
+          });
+        });
+
+        parents = newParents;
       }
     }
   }
@@ -121,7 +159,6 @@ function Tree(root) {
     }
     return combinations;
   }
-}
 
 function Node(data) {
   // this.parent = parent;  // uncomment if we'd like a reference to parent node
